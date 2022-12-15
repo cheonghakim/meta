@@ -1,4 +1,9 @@
 export class Vector {
+  /**
+   * 벡터 정규화
+   * @param vec 
+   * @returns Number[]
+   */
   static normalize(vec: any[]) {
     const mag = Vector.getMagnitude(vec)
     return vec.map((item) => {
@@ -6,7 +11,12 @@ export class Vector {
     })
   }
 
-  // Math.abs(1)인 경우 평행 -1일때 반대방향을 향하고 1일때 같은 방향을 향한다
+   /**
+   * 내적: Math.abs(1)인 경우 평행 -1일때 반대방향을 향하고 1일때 같은 방향을 향한다
+   * @param vec 
+   * @param vec2 
+   * @returns Number
+   */
   static dotProduct(vec: any[], vec2: any[]) {
     const added = vec
       .map((item, index) => {
@@ -18,6 +28,12 @@ export class Vector {
     }, 0)
   }
 
+  /**
+   * 외적: 두 벡터와 직교하는 벡터(노말)
+   * @param vec 
+   * @param vec2 
+   * @returns Number[]
+   */
   static vectorProduct(vec: any[], vec2: any[]) {
     // A (x, y, z)
     // B (x, y, z)
@@ -54,14 +70,14 @@ export class Vector {
     const sum2 = comparison.reduce((prev, curr) => {
       return prev + Math.pow(curr, 2)
     }, 0)
-    return sum1 > comparison ? true : false
+    return sum1 > sum2 ? true : false
   }
 
   /**
    * 두 벡터간의 각 크기, 방향X *
    * @param {*} vec
    * @param {*} vec2
-   * @returns
+   * @returns Number
    */
   static getAngle(vec: any[], vec2: any[]) {
     return Math.acos(
@@ -116,19 +132,19 @@ export class Vector {
   /**
    * Radian => Degree
    * @param {*} rad
-   * @returns Degree(Number)
+   * @returns Number
    */
   static radToDegree(rad: number) {
-    return rad * (180 / Math.PI)
+    return rad * (Math.PI / 180);
   }
 
   /**
    * Degree => Radian
    * @param {*} rad
-   * @returns Radian(Number)
+   * @returns Number
    */
   static degreeToRad(degree: number) {
-    return degree * (180 / Math.PI)
+    return degree * (180 / Math.PI);
   }
 
   /**
@@ -136,7 +152,7 @@ export class Vector {
    * @param {*} x (b.x - a.x)
    * @param {*} y (b.y - a.y)
    * @param {*} isDegree 각도 단위변환
-   * @returns
+   * @returns Number
    */
   static absAngle(x: number, y: number, isDegree = false) {
     if (!isDegree) return Math.atan2(y, x)
